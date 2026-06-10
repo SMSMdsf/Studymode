@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Mode</title>
+    <title>Sparx Reader</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
         }
 
         .screen {
@@ -23,29 +24,200 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            overflow: auto;
         }
 
         .screen.active {
             display: flex;
         }
 
-        /* Decoy Screen (Study Mode) */
+        /* Sparx Reader Decoy Screen */
         .decoy-screen {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f0f0f0;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        }
+
+        .sparx-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .decoy-screen h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .decoy-screen p {
+        .back-arrow {
             font-size: 1.5em;
-            opacity: 0.9;
+            cursor: pointer;
+        }
+
+        .sparx-header h1 {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .srp-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .sparx-content {
+            padding: 0;
+            flex: 1;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 1px 0 5px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+
+        .book-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .book-item:hover {
+            background: #f5f5f5;
+        }
+
+        .book-cover {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .book-info h3 {
+            font-size: 0.95em;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .book-info p {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .progress-small {
+            background: #ddd;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .progress-small-fill {
+            background: #6366f1;
+            height: 100%;
+            width: 65%;
+        }
+
+        .main-content {
+            flex: 1;
+            background: white;
+            padding: 40px 60px;
+            overflow-y: auto;
+        }
+
+        .reading-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .reading-header h2 {
+            font-size: 1.3em;
+            color: #333;
+        }
+
+        .reading-marker {
+            background: #6366f1;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .reading-text {
+            line-height: 2;
+            color: #333;
+            font-size: 1.05em;
+            font-family: 'Georgia', serif;
+            margin-bottom: 30px;
+        }
+
+        .reading-text p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .highlight-section {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .highlight-marker {
+            background: #c8e6c9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
         }
 
         /* Game Screen */
@@ -67,16 +239,27 @@
             color: #00ff00;
         }
 
+        .game-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .game-menu.hidden {
+            display: none;
+        }
+
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            gap: 10px;
+            grid-template-columns: repeat(3, 120px);
+            gap: 15px;
             margin: 20px auto;
         }
 
         .game-button {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: #00aa00;
             border: 2px solid #00ff00;
             color: white;
@@ -84,12 +267,55 @@
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
         }
 
         .game-button:hover {
             background: #00ff00;
             color: black;
             transform: scale(1.1);
+        }
+
+        /* Pac-Man Game Styles */
+        .pacman-game {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pacman-game.active {
+            display: flex;
+        }
+
+        .pacman-canvas {
+            border: 3px solid #00ff00;
+            background: #000;
+        }
+
+        .game-controls {
+            color: #00ff00;
+            font-size: 0.9em;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            background: #ff4444;
+            transform: scale(1.05);
         }
 
         .hint {
@@ -99,28 +325,121 @@
             font-size: 0.8em;
             opacity: 0.5;
             color: gray;
+            z-index: 999;
+        }
+
+        .game-screen .hint {
+            color: #00ff00;
         }
     </style>
 </head>
 <body>
-    <!-- Decoy Screen -->
+    <!-- Sparx Reader Decoy Screen -->
     <div class="screen decoy-screen active" id="decoyScreen">
-        <h1>Study Mode</h1>
-        <p>Focus on your work...</p>
+        <div class="sparx-header">
+            <div class="header-left">
+                <span class="back-arrow">‹</span>
+                <h1>Sparx Reader</h1>
+            </div>
+            <div class="header-right">
+                <div class="srp-badge">
+                    <span>7,715 SRP</span>
+                    <span>⭐</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <span>Shuceb Mohamed</span>
+                </div>
+                <span>🔔</span>
+                <span class="menu-icon">☰</span>
+            </div>
+        </div>
+        
+        <div class="sparx-content">
+            <div class="sidebar">
+                <div class="book-item">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <h3>The Iron Man</h3>
+                        <p>Chapter 3 - In Progress</p>
+                        <div class="progress-small">
+                            <div class="progress-small-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">📚</div>
+                    <div class="book-info">
+                        <h3>Adventure Tales</h3>
+                        <p>Not started</p>
+                        <div class="progress-small">
+                            <div class="progress-small-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">📕</div>
+                    <div class="book-info">
+                        <h3>Science Wonders</h3>
+                        <p>Completed</p>
+                        <div class="progress-small">
+                            <div class="progress-small-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="reading-header">
+                    <h2>The Iron Man - Chapter 3</h2>
+                    <div class="reading-marker">Start reading here</div>
+                </div>
+
+                <div class="reading-text">
+                    <p>Then the other gull flew up, wheeled around and landed and picked something up. Some awkward, heavy thing. The gull flew low and slowly, dragging the heavy thing. Finally, the gull dropped it beside the eye. This new thing had five legs. It moved. The gulls thought it was a strange kind of crab. They thought they had found a strange crab and a strange clam.</p>
+
+                    <div class="highlight-marker">They did not know they had found the Iron Man's eye and the Iron Man's right hand.</div>
+
+                    <p>But as soon as the eye and the hand got together the eye looked at the hand. Its light glowed blue. The hand stood up on three fingers and its thumb, and craned its forefinger like a long nose. It felt around. It touched the eye. Gleefully it picked up the eye, and tucked it under its middle finger. The eye peered out, between the forefinger and thumb. Now the hand could see.</p>
+
+                    <div class="highlight-section">
+                        <strong>Key moment:</strong> The Iron Man's parts beginning to reunite and function together.
+                    </div>
+
+                    <p>It looked around. Then it darted and jabbed one of the gulls with its stiffly held finger, then darted at the other and jabbed him. The two gulls danced this way and that, squawking and struggling, and then they both took to the air.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Game Screen -->
     <div class="screen game-screen" id="gameScreen">
         <div class="game-container">
             <h1>🎮 Secret Games</h1>
-            <p>Press ` to hide</p>
-            <div class="game-grid">
-                <button class="game-button">Game 1</button>
-                <button class="game-button">Game 2</button>
-                <button class="game-button">Game 3</button>
-                <button class="game-button">Game 4</button>
-                <button class="game-button">Game 5</button>
-                <button class="game-button">Game 6</button>
+            
+            <!-- Game Menu -->
+            <div class="game-menu" id="gameMenu">
+                <p style="margin-bottom: 20px;">Press ` to hide</p>
+                <div class="game-grid">
+                    <button class="game-button" onclick="startPacman()">👻 Pac-Man</button>
+                    <button class="game-button">🦅 Flappy</button>
+                    <button class="game-button">🎯 Pong</button>
+                    <button class="game-button">🧩 Tetris</button>
+                    <button class="game-button">🎮 Breakout</button>
+                    <button class="game-button">⭐ More</button>
+                </div>
+            </div>
+
+            <!-- Pac-Man Game -->
+            <div class="pacman-game" id="pacmanGame">
+                <h2 style="color: #ffff00;">PAC-MAN</h2>
+                <canvas id="pacmanCanvas" class="pacman-canvas" width="400" height="400"></canvas>
+                <div class="game-controls">
+                    <p>Use Arrow Keys to move • Eat dots and avoid ghosts!</p>
+                </div>
+                <button class="back-button" onclick="backToMenu()">← Back to Menu</button>
             </div>
         </div>
     </div>
@@ -148,6 +467,245 @@
                 }
             }
         });
+
+        // Pac-Man Game
+        let pacmanGame = null;
+
+        function startPacman() {
+            document.getElementById('gameMenu').classList.add('hidden');
+            document.getElementById('pacmanGame').classList.add('active');
+            pacmanGame = new PacManGame();
+            pacmanGame.start();
+        }
+
+        function backToMenu() {
+            document.getElementById('pacmanGame').classList.remove('active');
+            document.getElementById('gameMenu').classList.remove('hidden');
+            if (pacmanGame) {
+                pacmanGame.stop();
+            }
+        }
+
+        class PacManGame {
+            constructor() {
+                this.canvas = document.getElementById('pacmanCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.tileSize = 20;
+                this.gridWidth = this.canvas.width / this.tileSize;
+                this.gridHeight = this.canvas.height / this.tileSize;
+                
+                // Initialize maze (1 = wall, 0 = empty, 2 = dot, 3 = power pellet)
+                this.maze = this.createMaze();
+                
+                // Pacman
+                this.pacman = {
+                    x: 1,
+                    y: 1,
+                    direction: 'right',
+                    nextDirection: 'right'
+                };
+                
+                // Ghosts
+                this.ghosts = [
+                    { x: 9, y: 9, color: '#ff0000', direction: 'left' },
+                    { x: 10, y: 9, color: '#ffb8ff', direction: 'up' },
+                    { x: 9, y: 10, color: '#00ffff', direction: 'right' }
+                ];
+                
+                this.score = 0;
+                this.gameRunning = true;
+                this.gameSpeed = 100;
+                this.ghostSpeed = 150;
+                
+                this.keyMap = {};
+                this.setupKeyListeners();
+            }
+            
+            createMaze() {
+                const maze = Array(this.gridHeight).fill(null).map(() => 
+                    Array(this.gridWidth).fill(0)
+                );
+                
+                // Create walls around border
+                for (let i = 0; i < this.gridWidth; i++) {
+                    maze[0][i] = 1;
+                    maze[this.gridHeight - 1][i] = 1;
+                }
+                for (let i = 0; i < this.gridHeight; i++) {
+                    maze[i][0] = 1;
+                    maze[i][this.gridWidth - 1] = 1;
+                }
+                
+                // Add some internal walls
+                for (let i = 5; i < this.gridWidth - 5; i++) {
+                    maze[5][i] = 1;
+                    maze[this.gridHeight - 6][i] = 1;
+                }
+                
+                // Fill with dots
+                for (let y = 1; y < this.gridHeight - 1; y++) {
+                    for (let x = 1; x < this.gridWidth - 1; x++) {
+                        if (maze[y][x] !== 1) {
+                            maze[y][x] = 2;
+                        }
+                    }
+                }
+                
+                // Add power pellets
+                maze[2][2] = 3;
+                maze[2][this.gridWidth - 3] = 3;
+                maze[this.gridHeight - 3][2] = 3;
+                maze[this.gridHeight - 3][this.gridWidth - 3] = 3;
+                
+                return maze;
+            }
+            
+            setupKeyListeners() {
+                document.addEventListener('keydown', (e) => {
+                    const key = e.key.toLowerCase();
+                    if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(e.key)) {
+                        e.preventDefault();
+                        if (e.key === 'ArrowUp') this.pacman.nextDirection = 'up';
+                        else if (e.key === 'ArrowDown') this.pacman.nextDirection = 'down';
+                        else if (e.key === 'ArrowLeft') this.pacman.nextDirection = 'left';
+                        else if (e.key === 'ArrowRight') this.pacman.nextDirection = 'right';
+                    }
+                });
+            }
+            
+            canMove(x, y) {
+                if (x < 0 || x >= this.gridWidth || y < 0 || y >= this.gridHeight) return false;
+                return this.maze[y][x] !== 1;
+            }
+            
+            movePacman() {
+                let newX = this.pacman.x;
+                let newY = this.pacman.y;
+                
+                if (this.pacman.nextDirection === 'up') newY--;
+                else if (this.pacman.nextDirection === 'down') newY++;
+                else if (this.pacman.nextDirection === 'left') newX--;
+                else if (this.pacman.nextDirection === 'right') newX++;
+                
+                if (this.canMove(newX, newY)) {
+                    this.pacman.x = newX;
+                    this.pacman.y = newY;
+                    this.pacman.direction = this.pacman.nextDirection;
+                    
+                    // Eat dots
+                    if (this.maze[newY][newX] === 2) {
+                        this.score += 10;
+                        this.maze[newY][newX] = 0;
+                    }
+                    // Power pellet
+                    else if (this.maze[newY][newX] === 3) {
+                        this.score += 50;
+                        this.maze[newY][newX] = 0;
+                    }
+                }
+            }
+            
+            moveGhosts() {
+                this.ghosts.forEach(ghost => {
+                    const directions = ['up', 'down', 'left', 'right'];
+                    let validDirs = [];
+                    
+                    for (let dir of directions) {
+                        let x = ghost.x, y = ghost.y;
+                        if (dir === 'up') y--;
+                        else if (dir === 'down') y++;
+                        else if (dir === 'left') x--;
+                        else if (dir === 'right') x++;
+                        
+                        if (this.canMove(x, y)) {
+                            validDirs.push({ dir, x, y });
+                        }
+                    }
+                    
+                    if (validDirs.length > 0) {
+                        const move = validDirs[Math.floor(Math.random() * validDirs.length)];
+                        ghost.x = move.x;
+                        ghost.y = move.y;
+                    }
+                });
+            }
+            
+            checkCollisions() {
+                for (let ghost of this.ghosts) {
+                    if (ghost.x === this.pacman.x && ghost.y === this.pacman.y) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            draw() {
+                // Clear canvas
+                this.ctx.fillStyle = '#000';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw maze
+                this.ctx.fillStyle = '#0033ff';
+                for (let y = 0; y < this.gridHeight; y++) {
+                    for (let x = 0; x < this.gridWidth; x++) {
+                        if (this.maze[y][x] === 1) {
+                            this.ctx.fillRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
+                        } else if (this.maze[y][x] === 2) {
+                            this.ctx.fillStyle = '#ffff99';
+                            this.ctx.fillRect(x * this.tileSize + 8, y * this.tileSize + 8, 4, 4);
+                            this.ctx.fillStyle = '#0033ff';
+                        } else if (this.maze[y][x] === 3) {
+                            this.ctx.fillStyle = '#ffff99';
+                            this.ctx.fillRect(x * this.tileSize + 6, y * this.tileSize + 6, 8, 8);
+                            this.ctx.fillStyle = '#0033ff';
+                        }
+                    }
+                }
+                
+                // Draw Pacman
+                this.ctx.fillStyle = '#ffff00';
+                this.ctx.beginPath();
+                this.ctx.arc(this.pacman.x * this.tileSize + this.tileSize / 2, 
+                            this.pacman.y * this.tileSize + this.tileSize / 2, 
+                            this.tileSize / 2 - 2, 0, Math.PI * 2);
+                this.ctx.fill();
+                
+                // Draw Ghosts
+                this.ghosts.forEach(ghost => {
+                    this.ctx.fillStyle = ghost.color;
+                    this.ctx.fillRect(ghost.x * this.tileSize + 2, ghost.y * this.tileSize + 2, 
+                                    this.tileSize - 4, this.tileSize - 4);
+                });
+            }
+            
+            update() {
+                this.movePacman();
+                this.moveGhosts();
+                
+                if (this.checkCollisions()) {
+                    alert('Game Over! Score: ' + this.score);
+                    this.gameRunning = false;
+                    backToMenu();
+                }
+            }
+            
+            gameLoop() {
+                if (!this.gameRunning) return;
+                
+                this.update();
+                this.draw();
+                
+                setTimeout(() => this.gameLoop(), this.gameSpeed);
+            }
+            
+            start() {
+                this.gameLoop();
+            }
+            
+            stop() {
+                this.gameRunning = false;
+            }
+        }
     </script>
 </body>
 </html>
