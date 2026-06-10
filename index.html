@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .screen {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Decoy Screen (Study Mode) */
+        .decoy-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .decoy-screen h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .decoy-screen p {
+            font-size: 1.5em;
+            opacity: 0.9;
+        }
+
+        /* Game Screen */
+        .game-screen {
+            background: #1a1a1a;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .game-container {
+            text-align: center;
+        }
+
+        .game-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #00ff00;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+            margin: 20px auto;
+        }
+
+        .game-button {
+            width: 100px;
+            height: 100px;
+            background: #00aa00;
+            border: 2px solid #00ff00;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+
+        .game-button:hover {
+            background: #00ff00;
+            color: black;
+            transform: scale(1.1);
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8em;
+            opacity: 0.5;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decoy Screen -->
+    <div class="screen decoy-screen active" id="decoyScreen">
+        <h1>Study Mode</h1>
+        <p>Focus on your work...</p>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="screen game-screen" id="gameScreen">
+        <div class="game-container">
+            <h1>🎮 Secret Games</h1>
+            <p>Press ` to hide</p>
+            <div class="game-grid">
+                <button class="game-button">Game 1</button>
+                <button class="game-button">Game 2</button>
+                <button class="game-button">Game 3</button>
+                <button class="game-button">Game 4</button>
+                <button class="game-button">Game 5</button>
+                <button class="game-button">Game 6</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hint">Press ` to toggle</div>
+
+    <script>
+        let isGameVisible = false;
+
+        // Toggle between decoy and game screen
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '`') {
+                e.preventDefault();
+                isGameVisible = !isGameVisible;
+
+                const decoy = document.getElementById('decoyScreen');
+                const game = document.getElementById('gameScreen');
+
+                if (isGameVisible) {
+                    decoy.classList.remove('active');
+                    game.classList.add('active');
+                } else {
+                    game.classList.remove('active');
+                    decoy.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
