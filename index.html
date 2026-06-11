@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sparx</title>
+    <title>Sparx 5.5</title>
     <style>
         * {
             margin: 0;
@@ -300,6 +300,7 @@
         /* Math Content */
         .math-content {
             display: none;
+            flex-direction: column;
         }
 
         .math-content.active {
@@ -333,6 +334,7 @@
         /* Science Content */
         .science-content {
             display: none;
+            flex-direction: column;
         }
 
         .science-content.active {
@@ -478,7 +480,7 @@
         <div class="sparx-header" id="sparxHeader">
             <div class="header-left">
                 <span class="back-arrow">‹</span>
-                <h1 id="headerTitle">Sparx Reader</h1>
+                <h1 id="headerTitle">Sparx 5.5 Reader</h1>
             </div>
             <div class="header-right">
                 <div class="srp-badge">
@@ -562,76 +564,88 @@
                 <!-- Math Content -->
                 <div class="math-content">
                     <div class="reading-header">
-                        <h2>Independent Learning - Mathematics</h2>
-                        <div class="reading-marker math-mode">Select a Topic</div>
+                        <h2>Mathematics Topics</h2>
+                        <div class="reading-marker math-mode">Practice Problems</div>
                     </div>
 
                     <div class="problem-card">
-                        <h3>📊 Number</h3>
-                        <p>Learn about integers, decimals, fractions, and operations with numbers. Master the fundamentals of numerical concepts.</p>
+                        <h3>🔢 Multiplication</h3>
+                        <p><strong>Learn:</strong> Master multiplication tables and multi-digit multiplication techniques.</p>
+                        <div class="problem-equation">25 × 14 = ?</div>
+                        <p><strong>Solution:</strong> 25 × 14 = 350</p>
                     </div>
 
                     <div class="problem-card">
-                        <h3>➗ Algebra</h3>
-                        <p>Solve equations, work with variables, and explore algebraic expressions. From basic equations to quadratic formulas.</p>
+                        <h3>➗ Division</h3>
+                        <p><strong>Learn:</strong> Division with remainders, long division, and divisibility rules.</p>
+                        <div class="problem-equation">156 ÷ 12 = ?</div>
+                        <p><strong>Solution:</strong> 156 ÷ 12 = 13</p>
                     </div>
 
                     <div class="problem-card">
-                        <h3>📐 Geometry</h3>
-                        <p>Study shapes, angles, areas, and volumes. Understand spatial relationships and geometric properties.</p>
+                        <h3>🧩 Fractions</h3>
+                        <p><strong>Learn:</strong> Add, subtract, multiply, and divide fractions. Simplify and compare.</p>
+                        <div class="problem-equation">3/4 + 2/8 = ?</div>
+                        <p><strong>Solution:</strong> 3/4 + 2/8 = 6/8 + 2/8 = 8/8 = 1</p>
                     </div>
 
                     <div class="problem-card">
-                        <h3>📊 Ratio and Proportion</h3>
-                        <p>Compare quantities, work with ratios, and solve proportion problems. Essential for real-world applications.</p>
+                        <h3>📊 Decimals</h3>
+                        <p><strong>Learn:</strong> Operations with decimals, place value, and decimal conversion.</p>
+                        <div class="problem-equation">3.5 + 2.75 = ?</div>
+                        <p><strong>Solution:</strong> 3.5 + 2.75 = 6.25</p>
                     </div>
 
                     <div class="problem-card">
-                        <h3>🎲 Probability</h3>
-                        <p>Understand likelihood, calculate probabilities, and explore experimental vs theoretical probability.</p>
+                        <h3>➗ Percentages</h3>
+                        <p><strong>Learn:</strong> Calculate percentages, find percent change, and discount problems.</p>
+                        <div class="problem-equation">What is 20% of 150?</div>
+                        <p><strong>Solution:</strong> 20% of 150 = 0.20 × 150 = 30</p>
                     </div>
 
                     <div class="problem-card">
-                        <h3>📈 Statistics</h3>
-                        <p>Analyze data, create graphs, calculate averages, and interpret statistical information.</p>
+                        <h3>📐 Ratios & Proportions</h3>
+                        <p><strong>Learn:</strong> Simplify ratios, solve proportions, and real-world ratio problems.</p>
+                        <div class="problem-equation">If 3:5 = x:20, find x</div>
+                        <p><strong>Solution:</strong> 3/5 = x/20, so x = 12</p>
                     </div>
                 </div>
 
                 <!-- Science Content -->
                 <div class="science-content">
                     <div class="reading-header">
-                        <h2>Independent Learning - Science</h2>
-                        <div class="reading-marker science-mode">Select a Topic</div>
+                        <h2>Science Topics</h2>
+                        <div class="reading-marker science-mode">Explore & Learn</div>
                     </div>
 
                     <div class="experiment-card">
                         <h3>🔬 Biology - Cell Structure</h3>
-                        <p>Learn about the basic units of life. Explore plant and animal cells, their organelles, and how they function to keep organisms alive.</p>
+                        <p>Learn about the basic units of life. Plant and animal cells contain nucleus, mitochondria, and other organelles. Cells are the foundation of all living organisms.</p>
                     </div>
 
                     <div class="experiment-card">
-                        <h3>⚛️ Chemistry - Atoms and Elements</h3>
-                        <p>Discover the building blocks of matter. Understand atomic structure, the periodic table, and how elements combine to form compounds.</p>
+                        <h3>🐾 Animal Behavior & Habitats</h3>
+                        <p>Animals adapt to their environments through behavior and physical adaptations. Study predator-prey relationships, migration patterns, hibernation, and animal communication methods.</p>
                     </div>
 
                     <div class="experiment-card">
-                        <h3>🌍 Physics - Motion and Forces</h3>
-                        <p>Master Newton's laws of motion, understand forces, acceleration, and the principles that govern how objects move.</p>
+                        <h3>🌍 Physics - Motion & Forces</h3>
+                        <p>Understand Newton's Laws of Motion, gravity, friction, and velocity. Learn how forces cause changes in motion and how objects interact through forces.</p>
                     </div>
 
                     <div class="experiment-card">
-                        <h3>🧬 Genetics - Inheritance</h3>
-                        <p>Explore how traits are passed down through generations. Learn about DNA, genes, and heredity patterns.</p>
+                        <h3>🧬 Genetics & Evolution</h3>
+                        <p>Explore DNA, genes, and heredity. Understand how traits are passed from parents to offspring and how evolution shapes species over time through natural selection.</p>
                     </div>
 
                     <div class="experiment-card">
-                        <h3>🌱 Ecology - Ecosystems</h3>
-                        <p>Understand how organisms interact with each other and their environment. Study food chains, biodiversity, and conservation.</p>
+                        <h3>🌱 Ecology & Ecosystems</h3>
+                        <p>Study food chains, food webs, and energy flow in ecosystems. Learn about biomes, biodiversity, predator-prey relationships, and environmental conservation.</p>
                     </div>
 
                     <div class="experiment-card">
-                        <h3>⚡ Earth Science - Geology</h3>
-                        <p>Learn about Earth's structure, rocks and minerals, plate tectonics, and the processes that shape our planet.</p>
+                        <h3>⚡ Energy & Waves</h3>
+                        <p>Learn about kinetic and potential energy, energy transformations, light waves, sound waves, and electromagnetic radiation in the natural world.</p>
                     </div>
                 </div>
             </div>
@@ -770,16 +784,16 @@
             navBtns.forEach(b => b.classList.remove('math-mode', 'science-mode'));
 
             if (tab === 'reader') {
-                headerTitle.textContent = 'Sparx Reader';
+                headerTitle.textContent = 'Sparx 5.5 Reader';
             } else if (tab === 'math') {
-                headerTitle.textContent = 'Sparx Maths';
+                headerTitle.textContent = 'Sparx 5.5 Maths';
                 sparxHeader.classList.add('math-mode');
                 readingMarkers.forEach(m => m.classList.add('math-mode'));
                 bookCovers.forEach(b => b.classList.add('math-mode'));
                 progressFills.forEach(p => p.classList.add('math-mode'));
                 navBtns.forEach(b => b.classList.add('math-mode'));
             } else if (tab === 'science') {
-                headerTitle.textContent = 'Sparx Science';
+                headerTitle.textContent = 'Sparx 5.5 Science';
                 sparxHeader.classList.add('science-mode');
                 readingMarkers.forEach(m => m.classList.add('science-mode'));
                 bookCovers.forEach(b => b.classList.add('science-mode'));
@@ -977,7 +991,7 @@
             }
         }
 
-        // FLAPPY BIRD GAME
+        // FLAPPY BIRD GAME - FIXED
         function startFlappyBird() {
             document.getElementById('flappyWrapper').classList.add('active');
             startGame(new FlappyBirdGame());
@@ -993,15 +1007,20 @@
                 this.score = 0;
                 this.gameRunning = true;
                 this.gameOver = false;
+                this.flapListener = null;
 
-                document.addEventListener('keydown', (e) => {
-                    if (e.code === 'Space') { e.preventDefault(); this.flap(); }
-                });
+                this.flapListener = (e) => {
+                    if (e.code === 'Space') { 
+                        e.preventDefault(); 
+                        this.flap(); 
+                    }
+                };
+                document.addEventListener('keydown', this.flapListener);
                 this.canvas.addEventListener('click', () => this.flap());
             }
 
             flap() {
-                if (this.gameRunning) this.bird.velocity = -8;
+                if (this.gameRunning && !this.gameOver) this.bird.velocity = -8;
             }
 
             update() {
@@ -1012,7 +1031,6 @@
                     this.gameOver = true;
                     alert('Game Over! Score: ' + this.score);
                     this.gameRunning = false;
-                    backToMenu();
                 }
 
                 if (Math.random() < 0.02) {
@@ -1033,7 +1051,6 @@
                         this.gameOver = true;
                         alert('Game Over! Score: ' + this.score);
                         this.gameRunning = false;
-                        backToMenu();
                     }
                 });
                 
@@ -1065,10 +1082,11 @@
 
             stop() {
                 this.gameRunning = false;
+                if (this.flapListener) document.removeEventListener('keydown', this.flapListener);
             }
         }
 
-        // PONG GAME
+        // PONG GAME - FIXED with W/S and ARROW UP/DOWN
         function startPong() {
             document.getElementById('pongWrapper').classList.add('active');
             startGame(new PongGame());
@@ -1078,8 +1096,8 @@
             constructor() {
                 this.canvas = document.getElementById('pongCanvas');
                 this.ctx = this.canvas.getContext('2d');
-                this.paddle1 = { x: 10, y: 150, width: 10, height: 100, speed: 5 };
-                this.paddle2 = { x: 580, y: 150, width: 10, height: 100, speed: 5 };
+                this.paddle1 = { x: 10, y: 150, width: 10, height: 100, speed: 6 };
+                this.paddle2 = { x: 580, y: 150, width: 10, height: 100, speed: 6 };
                 this.ball = { x: 300, y: 200, radius: 8, vx: 5, vy: 5 };
                 this.score1 = 0;
                 this.score2 = 0;
@@ -1087,10 +1105,21 @@
             }
 
             update() {
-                if (isKeyPressed('w') || isKeyPressed('arrowup')) this.paddle1.y = Math.max(0, this.paddle1.y - this.paddle1.speed);
-                if (isKeyPressed('s') || isKeyPressed('arrowdown')) this.paddle1.y = Math.min(this.canvas.height - this.paddle1.height, this.paddle1.y + this.paddle1.speed);
-                if (isKeyPressed('i')) this.paddle2.y = Math.max(0, this.paddle2.y - this.paddle2.speed);
-                if (isKeyPressed('k')) this.paddle2.y = Math.min(this.canvas.height - this.paddle2.height, this.paddle2.y + this.paddle2.speed);
+                // P1 Controls: W/S or UP/DOWN arrows
+                if (isKeyPressed('w') || isKeyPressed('arrowup')) {
+                    this.paddle1.y = Math.max(0, this.paddle1.y - this.paddle1.speed);
+                }
+                if (isKeyPressed('s') || isKeyPressed('arrowdown')) {
+                    this.paddle1.y = Math.min(this.canvas.height - this.paddle1.height, this.paddle1.y + this.paddle1.speed);
+                }
+
+                // P2 Controls: I/K
+                if (isKeyPressed('i')) {
+                    this.paddle2.y = Math.max(0, this.paddle2.y - this.paddle2.speed);
+                }
+                if (isKeyPressed('k')) {
+                    this.paddle2.y = Math.min(this.canvas.height - this.paddle2.height, this.paddle2.y + this.paddle2.speed);
+                }
 
                 if (isKeyPressed(' ') && !this.gameRunning) {
                     this.gameRunning = true;
